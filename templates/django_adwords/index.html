@@ -1,0 +1,22 @@
+{% extends "django_adwords/base.html" %}
+
+{% block content %}
+<h1>Django Adwords home</h1>
+<h2>Commands to populate the Database</h2>
+<p>Use following commands to fill the database by clicking appropriate url</p>
+<ul>
+<li><a href="{% url load_data_from_file %}">load_data_from_file</a></li>
+<li><a href="{% url generate_data_file_to_upload %}">generate_data_file_to_upload</a></li>
+<li><a href="{% url check_for_new_campaigns_adgroups_keywords %}">check_for_new_campaigns_adgroups_keywords</a></li>
+
+{% for temp_data in url_data  %}
+<li>
+	{% if temp_data.val %}
+		<a href="{% url get_and_store temp_data.action temp_data.val %}">{{temp_data.action}} : {{temp_data.name}} : {{temp_data.val}}</a>
+	{% else%}
+		<a href="{% url get_and_store temp_data.action %}">{{temp_data.action}} : {{temp_data.name}} </a>
+	{% endif %}
+</li>
+{% endfor %}
+</ul>
+{% endblock content %}

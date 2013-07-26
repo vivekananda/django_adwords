@@ -1,0 +1,16 @@
+{% extends "django_adwords/base.html" %}
+{% block content %}
+
+<h1>{{msg}}</h1>
+{% if errors %}
+    {% for error in errors %}
+        {{ error }}
+    {% endfor %}
+{% endif %}
+<table>
+<form action="." method="post" enctype="multipart/form-data">{% csrf_token %}
+{{form.as_table}}<br/>
+<tr><th></th><td><input type=submit></td></tr>
+</form>
+</table>
+{% endblock content %}
